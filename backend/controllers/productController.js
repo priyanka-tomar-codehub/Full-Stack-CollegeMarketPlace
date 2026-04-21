@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import mongoose from "mongoose";
 
 export const createProduct = async(req,res) =>{
     try{
@@ -86,5 +87,29 @@ export const createProduct = async(req,res) =>{
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error" });
+  }
+
+};
+
+export const getRecommendedProducts = async(req,res) =>{
+    try{
+    const category = req.query.category;
+    const id = req.query.id;   
+
+    let filter = {
+      category: { $regex: category, $options: "i" }
+    };
+
+    if (id) {
+      filter._id = { $ne: new mongoose.Types.ObjectId(id) };
+    }
+
+    const products = await Product.find(filter).limit(4);
+
+    res.json(products);
+}
+    catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server Error" });
   }
 };
