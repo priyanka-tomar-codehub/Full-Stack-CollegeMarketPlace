@@ -9,7 +9,6 @@ export const createProduct = async(req,res) =>{
             title,
             description,
             price,
-            image,
             category,
            image: req.file ? req.file.filename : "",
             user: req.user._id
