@@ -12,7 +12,7 @@ const app = express();
 
 //Middleware
 app.use(cors({
-    origin: "https://mern-frontend-ek9b.vercel.app",
+    origin: ["https://mern-frontend-ek9b.vercel.app", "http://localhost:3000", "http://localhost:3001"],
     credentials: true
 }));
 app.use(express.urlencoded({extended:true}));
