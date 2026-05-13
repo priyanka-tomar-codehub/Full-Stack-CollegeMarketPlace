@@ -10,7 +10,7 @@ export const createProduct = async(req,res) =>{
             description,
             price,
             category,
-           image: req.file ? req.file.filename : "",
+           image: req.file.path,
             user: req.user._id
             
         });

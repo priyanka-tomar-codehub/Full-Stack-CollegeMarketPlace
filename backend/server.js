@@ -1,12 +1,11 @@
-import dotenv from "dotenv";
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 import connectDB from "./config/db.js";
 import mongoose from "mongoose";
-
-dotenv.config();
 
 const app = express();
 
@@ -19,7 +18,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use("/api/auth",authRoutes);
 app.use("/api/products",productRoutes);
-app.use("/uploads", express.static("uploads"));
+app.use("/api/orders", orderRoutes);
+// app.use("/uploads", express.static("uploads"));
 
 
 const PORT = process.env.PORT || 5000;
