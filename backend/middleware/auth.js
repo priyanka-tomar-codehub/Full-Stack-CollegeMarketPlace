@@ -14,14 +14,17 @@ export const protect = async(req,res,next)=>
 
            req.user = await User.findById(decoded.id).select("-password");
 
-           next();
-        }catch (error) {
-      res.status(401).json({ message: "Not authorized" });
+        next();
+      } catch (error) {
+        return res.status(401).json({ message: "Not authorized" });
+      }
     }
-  }
 
-  if (!token) {
-    res.status(401).json({ message: "No token" });
+    if (!token) {
+      return res.status(401).json({ message: "No token" });
+    }
+  } else {
+    return res.status(401).json({ message: "No token" });
   }
 };
 

@@ -5,6 +5,8 @@ import User from "../models/User.js";
 export const createOrder = async (req, res) => {
   try {
     const { productId, message } = req.body;
+    if (!productId) return res.status(400).json({ message: "Product ID is required" });
+
     const product = await Product.findById(productId).populate("user");
     if (!product) return res.status(404).json({ message: "Product not found" });
 
