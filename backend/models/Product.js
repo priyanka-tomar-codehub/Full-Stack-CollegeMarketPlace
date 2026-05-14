@@ -21,6 +21,10 @@ export const productSchema = new mongoose.Schema(
    category:{
     type:String
    },
+   phone: {
+   type: String,
+   required: true
+   },
    user:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"

@@ -10,6 +10,7 @@ export const createProduct = async(req,res) =>{
             description,
             price,
             category,
+           phone: req.body.phone,
            image: req.file.path,
             user: req.user._id
             
