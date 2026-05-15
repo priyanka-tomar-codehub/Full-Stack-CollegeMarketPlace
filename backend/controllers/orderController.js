@@ -44,10 +44,35 @@ export const getSellerOrders = async (req, res) => {
   }
 };
 
+// export const updateOrderStatus = async (req, res) => {
+//   try {
+//     const { status } = req.body;
+//     const order = await Order.findByIdAndUpdate(req.params.id, { status }, { new: true });
+//     res.json(order);
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
 export const updateOrderStatus = async (req, res) => {
   try {
     const { status } = req.body;
-    const order = await Order.findByIdAndUpdate(req.params.id, { status }, { new: true });
+
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    order.status = status;
+
+    await order.save();
+
+    if (status === "paid") {
+      await Product.findByIdAndUpdate(order.product, {
+        isSold: true,
+      });
+    }
+
     res.json(order);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
