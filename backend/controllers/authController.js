@@ -8,7 +8,7 @@ export const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     // Allow only Amity emails
-    if (!email.toLowerCase().endsWith("@amity.edu")) {
+    if (!email.toLowerCase().endsWith("amity.edu")) {
      return res.status(400).json({
      message: "Only Amity students can register"
    });
@@ -46,7 +46,7 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     // Allow only Amity emails
-  if (!email.toLowerCase().endsWith("@amity.edu")) {
+  if (!email.toLowerCase().endsWith("amity.edu")) {
     return res.status(400).json({
     message: "Only Amity students can register"
   });
