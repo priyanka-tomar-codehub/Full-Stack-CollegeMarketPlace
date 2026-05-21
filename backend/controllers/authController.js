@@ -7,6 +7,13 @@ export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    // Allow only Amity emails
+    if (!email.toLowerCase().endsWith("@amity.edu")) {
+     return res.status(400).json({
+     message: "Only Amity students can register"
+   });
+   }
+
     // Check user
     const userExists = await User.findOne({ email });
     if (userExists) {
@@ -37,6 +44,13 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    // Allow only Amity emails
+  if (!email.toLowerCase().endsWith("@amity.edu")) {
+    return res.status(400).json({
+    message: "Only Amity students can register"
+  });
+  }
 
     const user = await User.findOne({ email });
     if (!user) {
