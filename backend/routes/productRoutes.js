@@ -21,3 +21,5 @@ router.delete("/:id",protect,deleteProduct);
 router.post("/",protect, upload.single("image"), createProduct);
 
 export default router;
+
+

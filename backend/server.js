@@ -6,6 +6,7 @@ import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import connectDB from "./config/db.js";
 import mongoose from "mongoose";
+import aiRoutes from "./routes/aiRoutes.js";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use("/api/auth",authRoutes);
 app.use("/api/products",productRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/ai", aiRoutes);
 // app.use("/uploads", express.static("uploads"));
 
 
@@ -28,15 +30,17 @@ const DB_URI = process.env.MONGODB_URI;
 
 
 //Database Connection
-try{
-  mongoose.connect(DB_URI);
-  console.log("Connected to mongodb");
-}
-catch(error)
-{
-  console.log(error);
-}
+// try{
+//   mongoose.connect(DB_URI);
+//   console.log("Connected to mongodb");
+// }
+// catch(error)
+// {
+//   console.log(error);
+// }
 
+
+connectDB();
 
 //Routes
 app.get('/',(req,res) =>{
